@@ -43,12 +43,12 @@ fun Main(modifier: Modifier = Modifier) {
     ) {
         Text(text = "相手のカード", fontSize = 20.sp)
         Text(
-            text = com.value.toString(),
+            text = com.intValue.toString(),
             fontSize = 48.sp
         )
         Text(text = "あなたのカード", fontSize = 20.sp)
         Text(
-            text = you.value.toString(),
+            text = you.intValue.toString(),
             fontSize = 48.sp
         )
         Button(onClick = {
