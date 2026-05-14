@@ -10,6 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -48,50 +56,74 @@ fun Main(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize()
     ) {
         Text(text = "相手のカード", fontSize = 20.sp)
-        Text(
-            text = com.intValue.toString(),
-            fontSize = 48.sp
-        )
-        Text(text = "あなたのカード", fontSize = 20.sp)
-        Text(
-            text = you.intValue.toString(),
-            fontSize = 48.sp
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-        ){
-            Button(
-                onClick = {
-                    if (com.intValue == you.intValue) {
-                        message = "引き分け"
-                    } else if (com.intValue < you.intValue) {
-                        message = "あなたの勝ち"
-                    } else {
-                        message = "あなたの負け"
-                    }
-                },
-            ) {
-                Text(text = "High", fontSize = 20.sp)
-            }
-            Button(
-                onClick = {
-                    if (com.intValue == you.intValue) {
-                        message = "引き分け"
-                    } else if (com.intValue > you.intValue) {
-                        message = "あなたの勝ち"
-                    } else {
-                        message = "あなたの負け"
-                    }
-                },
-            ) {
-                Text(text = "Low", fontSize = 20.sp)
-            }
+        Box (
+            modifier = Modifier
+                .width(120.dp)
+                .height(160.dp)
+                .padding(8.dp)
+                .border(2.dp, Color.Black)
+                .background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = com.intValue.toString(),
+                fontSize = 48.sp
+            )
         }
-        Button(onClick = {
-            com.intValue = (1..13).random()
-            you.intValue = (1..13).random()
-        }) {
-            Text(text = "次のゲーム", fontSize = 20.sp)
+        Text(text = "あなたのカード", fontSize = 20.sp)
+        Box (
+            modifier = Modifier
+                .width(120.dp)
+                .height(160.dp)
+                .padding(8.dp)
+                .border(2.dp, Color.Black)
+                .background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = if (message.isEmpty()) "??" else you.intValue.toString(),
+                fontSize = 48.sp
+            )
+        }
+        if (message.isEmpty()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Button(
+                    onClick = {
+                        if (com.intValue == you.intValue) {
+                            message = "引き分け"
+                        } else if (com.intValue < you.intValue) {
+                            message = "あなたの勝ち"
+                        } else {
+                            message = "あなたの負け"
+                        }
+                    },
+                ) {
+                    Text(text = "High", fontSize = 20.sp)
+                }
+                Button(
+                    onClick = {
+                        if (com.intValue == you.intValue) {
+                            message = "引き分け"
+                        } else if (com.intValue > you.intValue) {
+                            message = "あなたの勝ち"
+                        } else {
+                            message = "あなたの負け"
+                        }
+                    },
+                ) {
+                    Text(text = "Low", fontSize = 20.sp)
+                }
+            }
+        } else {
+            Button(onClick = {
+                com.intValue = (1..13).random()
+                you.intValue = (1..13).random()
+                message = ""
+            }) {
+                Text(text = "次のゲーム", fontSize = 20.sp)
+            }
         }
         Text(text = message, fontSize = 28.sp)
     }
