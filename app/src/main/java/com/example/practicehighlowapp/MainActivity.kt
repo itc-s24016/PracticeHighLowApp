@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -53,7 +55,11 @@ fun Main(modifier: Modifier = Modifier) {
     var message by remember { mutableStateOf("") }
 
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color(0xFF32A532))
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "相手のカード", fontSize = 20.sp)
         Box (
@@ -70,6 +76,8 @@ fun Main(modifier: Modifier = Modifier) {
                 fontSize = 48.sp
             )
         }
+        Spacer(modifier = Modifier.height(24.dp))
+
         Text(text = "あなたのカード", fontSize = 20.sp)
         Box (
             modifier = Modifier
@@ -85,9 +93,12 @@ fun Main(modifier: Modifier = Modifier) {
                 fontSize = 48.sp
             )
         }
+        Spacer(modifier = Modifier.height(24.dp))
+
         if (message.isEmpty()) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Button(
                     onClick = {
@@ -125,6 +136,7 @@ fun Main(modifier: Modifier = Modifier) {
                 Text(text = "次のゲーム", fontSize = 20.sp)
             }
         }
+        Spacer(modifier = Modifier.height(24.dp))
         Text(text = message, fontSize = 28.sp)
     }
 }
